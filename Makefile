@@ -54,3 +54,7 @@ clean:
 	rm -f src/*.c src/*.so
 	python setup.py clean
 	rm -rf coverage.xml
+
+.PHONY: run
+run:
+	@PYTHONPATH=. python src/main.py urls.txt --attempts 3

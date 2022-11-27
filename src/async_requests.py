@@ -1,5 +1,6 @@
 import asyncio
-from typing import List
+from dataclasses import dataclass
+from typing import Any, Dict, List, Optional
 
 import httpx
 
@@ -9,45 +10,63 @@ HEADERS = {
 }
 
 
-async def get_async(url: str):
+@dataclass
+class Result:
+    """Class for keeping track of responses and errors."""
+
+    url: str
+    response: Optional[httpx.Response] = None
+    error: Optional[httpx.RequestError] = None
+
+    def status(self):
+        """returns the status if there is a reponse."""
+        if self.response is None:
+            return None
+        return self.response
+
+
+async def get_async(
+    url: str, *, follow_redirects=True, headers=HEADERS, **kwargs
+) -> Result:
     """Send a asynchronous `GET` request."""
+    result = Result(url=url)
     try:
         async with httpx.AsyncClient(
-            headers=HEADERS, follow_redirects=True
+            headers=headers, follow_redirects=follow_redirects, **kwargs
         ) as client:
             res = await client.get(url)
-            res.original_url = url
-        return res
+            result.response = res
     except httpx.RequestError as error:
+        result.error = error
 
-        class Res:
-            status_code = "error"
-            e = error
-
-        return Res
+    return result
 
 
-def run_requests(urls):
+def run_requests(
+    urls: List[str], client_kwargs: Dict[str, Any] = None
+) -> List[Result]:
     """Run the event loop until all requests are done."""
 
+    client_kwargs = client_kwargs or {}
+
     async def main():
-        responses = await asyncio.gather(*[get_async(url) for url in urls])
-        return responses
+        results = await asyncio.gather(
+            *[get_async(url, **client_kwargs) for url in urls]
+        )
+        return results
 
     loop = asyncio.get_event_loop()
-    responses = loop.run_until_complete(main())
-    return responses
+    results = loop.run_until_complete(main())
+    return results
 
 
-def divide_chunks(items: list, n):
-    """Divide a list in chunks."""
-    for i in range(0, len(items), n):
-        yield items[i : i + n]
+def run_request_attempts(urls: List[str],* , attempts=1, client_kwargs: Dict[str, Any] = None) -> List[Result]:
+    """Run the requests many times."""
 
-
-def chunk_requests(urls, chunksize=10) -> List[httpx.Response]:
-    """Run event loops with chunks of asynchronous `GET` request."""
-    result = []
-    for chunk in divide_chunks(urls, chunksize):
-        result.extend(run_requests(chunk))
-    return result
+    results = run_requests(urls, client_kwargs=client_kwargs)
+    while attempts > 1:
+        attempts -= 1
+        urls_attempts = [result.url for result in results if result.status != 200]
+        results_attempt = run_requests(urls, client_kwargs=client_kwargs)
+        results.extend(results_attempt)
+    return results
