@@ -1,7 +1,12 @@
 {
   "cSpell.words": [
+    "iloc",
     "isort",
-    "KHTML"
+    "KHTML",
+    "listagem",
+    "serv",
+    "serviço",
+    "servicos"
   ],
   "python.pythonPath": "venv/bin/python"
 }
