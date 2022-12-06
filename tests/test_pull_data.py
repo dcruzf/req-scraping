@@ -4,17 +4,19 @@ from bs4 import BeautifulSoup
 from src.pull_data import (
     get_sentence_by_tag,
     get_sentences_body_header,
+    get_sentences_div_avaliacao,
+    get_sentences_div_canais_atendimento,
     get_sentences_div_contentcore_avaliacao_container,
     get_sentences_div_contentcore_header,
     get_sentences_div_id_viewlet_above_content_body,
     get_sentences_div_listagem_servicos,
+    get_sentences_div_portal_footer,
+    get_sentences_id_category,
     get_sentences_id_dados_basicos,
-    get_sentences_id_solicitantes,
     get_sentences_id_etapas_servico,
     get_sentences_id_outras,
+    get_sentences_id_solicitantes,
     get_sentences_nav_breadcrumbs,
-    get_sentences_div_canais_atendimento,
-    get_sentences_id_category,
 )
 
 
@@ -183,6 +185,77 @@ def test_get_sentences_id_category(soup):
         "Espaço Educador",
         "Sala Verde",
         "Socioambiental",
+    ]
+
+    assert sentences == expected, soup.base.get("href")
+
+
+def test_get_sentences_div_avaliacao(soup):
+    sentences = get_sentences_div_avaliacao(soup)
+    expected = [
+        "Esta página foi útil para você?",
+    ]
+
+    assert sentences == expected, soup.base.get("href")
+
+
+def test_get_sentences_div_portal_footer(soup):
+    sentences = get_sentences_div_portal_footer(soup)
+    expected = [
+        "Serviços",
+        "Buscar serviços por",
+        "Categorias",
+        "Órgãos",
+        "Estados",
+        "Serviços por público alvo",
+        "Cidadãos",
+        "Empresas",
+        "Órgãos e Entidades Públicas",
+        "Demais segmentos (ONGs, organizações sociais, etc)",
+        "Servidor Público",
+        "Galeria de Aplicativos",
+        "Notícias",
+        "Últimas Notícias do GOV.BR",
+        "Últimas notícias",
+        "Serviços para o cidadão",
+        "Saúde",
+        "Agricultura e Pecuária",
+        "Cidadania e Assistência Social",
+        "Cultura e Esporte",
+        "Economia e Gestão Pública",
+        "Educação e Pesquisa",
+        "Energia",
+        "Infraestrutura",
+        "Justiça e Segurança",
+        "Meio Ambiente",
+        "Trabalho e Previdência",
+        "Turismo",
+        "Acompanhe o Planalto",
+        "Navegação",
+        "Acessibilidade",
+        "Mapa do Site",
+        "Termos de Uso",
+        "Sobre o gov.br",
+        "Acesse sua conta gov.br",
+        "Órgãos do Governo",
+        "Temas em Destaque",
+        "Por dentro do Gov.br",
+        "Dúvidas Frequentes em relação ao Portal gov.br",
+        "Dúvidas Frequentes da conta gov.br",
+        "Ajuda para Navegar o Portal",
+        "Conheça os elementos do Portal",
+        "Política de e-participação",
+        "Termos de Uso",
+        "Governo Digital",
+        "Guia de Edição de Serviços do Portal Gov.br",
+        "Dados do Governo Federal",
+        "Dados Abertos",
+        "Painel Estatístico de Pessoal",
+        "Painel de Compras do Governo Federal",
+        "Acesso à Informação",
+        "Redefinir Cookies",
+        "Redes sociais",
+        "Todo o conteúdo deste site está publicado sob a licençaCreative Commons Atribuição-SemDerivações 3.0 Não Adaptada.",
     ]
 
     assert sentences == expected, soup.base.get("href")

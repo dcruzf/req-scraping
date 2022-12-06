@@ -1,5 +1,6 @@
-from bs4.element import NavigableString
 import re
+
+from bs4.element import NavigableString
 
 re_spaces = re.compile(r"\s{2,}")
 
@@ -150,3 +151,23 @@ def get_sentences_div_canais_atendimento(soup):
 def get_sentences_id_category(soup):
     category = soup.body.find("div", attrs={"id": "category"})
     return category.get_text("<#SPLIT#>", strip=True).split("<#SPLIT#>")
+
+
+def get_sentences_div_avaliacao(soup):
+    avaliacao = soup.body.find(
+        "div", attrs={"class": "title servico_avaliar_pergunta"}
+    )
+    return avaliacao.get_text("<#SPLIT#>", strip=True).split("<#SPLIT#>")
+
+
+def get_sentences_div_portal_footer(soup):
+    footer = soup.body.find("footer", attrs={"id": "portal-footer"})
+    list_nav = footer.find("ul", attrs={"class": "list-navigation"})
+    cookies = footer.find("div", attrs={"class": "lgpd-reset-cookies"})
+    redes = footer.find("div", attrs={"class": "redes-sociais"})
+    texto_copyright = footer.find("div", attrs={"class": "texto-copyright"})
+    text_list = list_nav.get_text("<#SPLIT#>", strip=True).split("<#SPLIT#>")
+    text_list.append(cookies.a.get_text(strip=True))
+    text_list.append(redes.div.get_text(strip=True))
+    text_list.append(texto_copyright.get_text(strip=True))
+    return text_list
