@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 
-from async_requests import run_async_requests
+from .async_requests import run_async_requests
 
 from .pull_data import (
     get_sentences_body_header,
