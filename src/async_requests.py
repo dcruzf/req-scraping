@@ -93,3 +93,5 @@ def run_async_requests(
         result200.append(r200)
         history.append(rnot200)
         urls_servicos = list(rnot200.keys())
+
+    return result200, history
