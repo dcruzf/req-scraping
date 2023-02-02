@@ -54,11 +54,11 @@ def run_requests(urls: List[str], **client_kwargs) -> List[Result]:
     return results
 
 
-def make_chunck(l, chunck_size=10):
-    start, end, chunck_size = 0, len(l), max(c, 1)
+def make_chunck(list_of_urls, chunck_size=10):
+    start, end, chunck_size = 0, len(list_of_urls), max(chunck_size, 1)
     while start < end:
         stop = min(start + chunck_size, end)
-        yield l[start:stop]
+        yield list_of_urls[start:stop]
         start = stop
 
 
