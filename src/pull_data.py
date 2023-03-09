@@ -169,5 +169,7 @@ def get_sentences_div_portal_footer(soup):
     text_list = list_nav.get_text("<#SPLIT#>", strip=True).split("<#SPLIT#>")
     text_list.append(cookies.a.get_text(strip=True))
     text_list.append(redes.div.get_text(strip=True))
-    text_list.append(texto_copyright.get_text(strip=True))
+    text_list.append(
+        texto_copyright.get_text(" ", strip=True).replace(" .", ".")
+    )
     return text_list

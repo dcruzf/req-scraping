@@ -4,18 +4,26 @@ import pytest
 from bs4 import BeautifulSoup
 
 
-@pytest.fixture(scope="session")
-def code_string():
-    p = Path("tests/resource/test_html.html")
+def get_code(path):
+    p = Path(path)
     if not p.exists():
         print(p)
         raise FileExistsError
     code = p.read_text()
-    yield code
+    return code
 
 
-@pytest.fixture(scope="session")
-def soup(code_string):
+@pytest.fixture(scope="module")
+def case1():
     """Read requests DataFrame."""
-    soup = BeautifulSoup(code_string, "html.parser")
+    path = "tests/resource/case1_projeto-salas-verdes.html"
+    soup = BeautifulSoup(get_code(path), "html.parser")
+    yield soup
+
+
+@pytest.fixture(scope="module")
+def case2():
+    """Read requests DataFrame."""
+    path = "tests/resource/case2_obter-bolsa-premio-do-programa-de-acao-afirmativa-do-instituto-rio-branco.html"
+    soup = BeautifulSoup(get_code(path), "html.parser")
     yield soup

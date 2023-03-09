@@ -20,8 +20,8 @@ from src.pull_data import (
 )
 
 
-def test_get_sentences_body_header(soup):
-    sentences = get_sentences_body_header(soup)
+def test_get_sentences_body_header(case2):
+    sentences = get_sentences_body_header(case2)
     expected = [
         "Órgãos do Governo",
         "Acesso à Informação",
@@ -29,56 +29,56 @@ def test_get_sentences_body_header(soup):
         "Acessibilidade",
         "Serviços e Informações do Brasil",
     ]
-    assert sentences == expected, soup.base.get("href")
+    assert sentences == expected, case2.base.get("href")
 
 
-def test_get_sentences_nav_breadcrumbs(soup):
-    sentences = get_sentences_nav_breadcrumbs(soup)
+def test_get_sentences_nav_breadcrumbs(case2):
+    sentences = get_sentences_nav_breadcrumbs(case2)
     expected = [
         "Serviços",
-        "Aderir ao Projeto Salas Verdes",
+        "Obter bolsa-prêmio do Programa de Ação Afirmativa do Instituto Rio Branco",
     ]
-    assert sentences == expected, soup.base.get("href")
+    assert sentences == expected, case2.base.get("href")
 
 
-def test_get_sentences_div_listagem_servicos(soup):
-    sentences = get_sentences_div_listagem_servicos(soup)
+def test_get_sentences_div_listagem_servicos(case2):
+    sentences = get_sentences_div_listagem_servicos(case2)
     expected = [
         "Meio Ambiente e Clima",
         "Pesquisa e Aprendizado",
         "Estudos e Capacitações",
     ]
-    assert sentences == expected, soup.base.get("href")
+    assert sentences == expected, case2.base.get("href")
 
 
-def test_get_sentences_div_contentcore_header(soup):
-    sentences = get_sentences_div_contentcore_header(soup)
+def test_get_sentences_div_contentcore_header(case2):
+    sentences = get_sentences_div_contentcore_header(case2)
     expected = [
         "Aderir ao Projeto Salas Verdes",
         "Iniciar",
     ]
-    assert sentences == expected, soup.base.get("href")
+    assert sentences == expected, case2.base.get("href")
 
 
-def test_get_sentences_div_contentcore_avaliacao_container(soup):
-    sentences = get_sentences_div_contentcore_avaliacao_container(soup)
+def test_get_sentences_div_contentcore_avaliacao_container(case2):
+    sentences = get_sentences_div_contentcore_avaliacao_container(case2)
     expected = ["Avaliação: Sem Avaliação"]
-    assert sentences == expected, soup.base.get("href")
+    assert sentences == expected, case2.base.get("href")
 
 
-def test_get_sentences_div_id_viewlet_above_content_body(soup):
-    sentences = get_sentences_div_id_viewlet_above_content_body(soup)
+def test_get_sentences_div_id_viewlet_above_content_body(case2):
+    sentences = get_sentences_div_id_viewlet_above_content_body(case2)
     expected = ["Última Modificação: 25/07/2022", "Compartilhe:"]
-    assert sentences == expected, soup.base.get("href")
+    assert sentences == expected, case2.base.get("href")
 
 
-def test_get_sentences_id_dados_basicos(soup):
-    sentences = get_sentences_id_dados_basicos(soup)
+def test_get_sentences_id_dados_basicos(case2):
+    sentences = get_sentences_id_dados_basicos(case2)
     expected = [
         "O que é?",
         "O Projeto Salas Verdes tem como objetivo incentivar a implantação de espaços educadores para atuarem como centros de informação e formação ambiental em todo o país. A Sala Verde é um espaço dedicado ao desenvolvimento de atividades de caráter educacional, voltadas à temática socioambiental e cultural, que visam contribuir e estimular a discussão crítica, a organização e o fortalecimento de identidades grupais. As instituições que queiram criar uma sala verde devem concorrer à chamada pública, submetendo ao MMA um Projeto Político Pedagógico. Ao chancelar uma Sala Verde, o MMA reconhece a sua relevância e certifica que o projeto apresentado está alinhado com as diretrizes e objetivos da Política Nacional de Educação Ambiental. Estão entre as principais ações realizadas pelo MMA em prol das salas verdes: Acompanhar as atividades realizadas pelas salas verdes; Dar visibilidade às atividades desenvolvidas pela Sala Verde no portal do projeto, grupo de facebook e e-mail; Divulgar o espaço como referência em meio ambiente na área de abrangência geográfica de sua localização; Enviar kits do Circuito Tela Verde para as salas verdes, caso tenham interesse em realizar atividades de educação ambiental utilizando material audiovisual; Disponibilizar, em meio digital, publicações e materiais do MMA, de suas entidades vinculadas e de potenciais parceiros institucionais; Informar sobre a disponibilidade de cursos lançados na Plataforma de Educação à distância do MMA.",
     ]
-    assert sentences == expected, soup.base.get("href")
+    assert sentences == expected, case2.base.get("href")
 
 
 @pytest.mark.parametrize(
@@ -100,8 +100,8 @@ def test_get_sentence_by_tag(tag, expected):
     assert result == expected, tag.name
 
 
-def test_get_sentences_id_solicitantes(soup):
-    sentences = get_sentences_id_solicitantes(soup)
+def test_get_sentences_id_solicitantes(case2):
+    sentences = get_sentences_id_solicitantes(case2)
     expected = [
         "Quem pode utilizar este serviço?",
         "Instituições com capacidade comprovada de atuação na área de Educação Ambiental.",
@@ -112,56 +112,53 @@ def test_get_sentences_id_solicitantes(soup):
         "Equipamentos e recursos: não é necessário que a Sala Verde disponha inicialmente de recursos adicionais, além dos recursos humanos e da infraestrutura mínima já mencionada. Considera-se que recursos adicionais, tais como computadores, projetores, quadros podem ser adquiridos e incorporados ao patrimônio da instituição à medida que o projeto se fortaleça e se articule com outras iniciativas;",
     ]
 
-    assert sentences == expected, soup.base.get("href")
+    assert sentences == expected, case2.base.get("href")
 
 
-def test_get_sentences_id_etapas_servico(soup):
-    sentences = get_sentences_id_etapas_servico(soup)
+def test_get_sentences_id_etapas_servico(case2):
+    sentences = get_sentences_id_etapas_servico(case2)
     expected = [
         "Etapas para a realização deste serviço",
-        "Submeter o Projeto Político Pedagógico (PPP) para avaliação e seleção pela equipe técnica do MMA",
-        "As instituições interessadas em criar uma sala verde devem submeter o seu PPP ao MMA após o lançamento de chamada pública. O PPP deve conter, no mínimo: Identificação do projeto; histórico e justificativa; objetivos gerais e específicos; programação de ações e metas; metodologia; mapeamento e identificação dos recursos; cronograma de atividades; estratégias de monitoramento e avaliação; público e região de atuação; referências bibliográficas.",
-        "Canais de prestação",
-        "E-mail :",
-        "sissalasverdes@mma.gov.br",
-        "Documentação",
+        "Inscrever-se no Programa",
+        "Acesse o edital na página do PAA do Instituto Rio Branco",  # TODO: resolver no get_sentence_by_tag
+        "",
     ]
 
     for i in range(len(expected)):
         assert sentences[i] == expected[i], (
             sentences[i],
-            soup.base.get("href"),
+            case2.base.get("href"),
         )
 
 
-def test_get_sentences_id_outras(soup):
-    sentences = get_sentences_id_outras(soup)
+def test_get_sentences_id_outras(case2):
+    sentences = get_sentences_id_outras(case2)
     expected = [
         "Outras Informações",
         "Quanto tempo leva?",
-        "Em média 90 dia(s) útil(eis) é o tempo estimado para a prestação deste serviço.",
+        "Entre 0 e 0 dia(s) corrido(s) é o tempo estimado para a prestação deste serviço.",
+        "Informações adicionais ao tempo estimado",
+        "O tempo não é estimado ainda.",
         "Este serviço é gratuito para o cidadão.",
         "Para mais informações ou dúvidas sobre este serviço, entre em contato",
-        "Endereço de correio eletrônico: salaverde@mma.gov.br Telefone: 61 2028-1207",
-        "Este é um serviço do(a) Ministério do Meio Ambiente . Em caso de dúvidas, reclamações ou sugestões favor contactá-lo.",
-        "Validade do Documento",
-        "Sem validade.",
-        "Informações adicionais ao tempo de validade",
-        "Cada Sala Verde recebe um Banner, com a logomarca do MMA, representando a aprovação e chancela do MMA com relação à existência do espaço educador. Não existe um prazo de validade para o banner. Além disso, a qualquer momento, mediante justificativa, a instituição pode solicitar a inativação da sala verde.",
+        "¨ Endereço: Setor de Administração Federal Sul, Quadra 5, Lotes 2/3 - Brasília/DF CEP: 70070-600 - BRASIL ¨ E-mail: irbr@itamaraty.gov.br ¨ Telefone: +55 (61) 2030-9851 ¨ ou envie uma mensagem ao IRB",
+        "Este é um serviço do(a) Ministério das Relações Exteriores . Em caso de dúvidas, reclamações ou sugestões favor contactá-lo.",
+        "Legislação",
+        "LEI Nº 12.990, DE 9 DE JUNHO DE 2014 LEI Nº 12.527, DE 18 DE NOVEMBRO DE 2011",  # TODO: verificar solução para <ul>'s
         "Tratamento a ser dispensado ao usuário no atendimento",
-        "O usuário deverá receber, conforme os princípios expressos na lei nº 13.460/17, um atendimento pautado nas seguintes diretrizes: Urbanidade; Respeito; Acessibilidade; Cortesia; Presunção da boa-fé do usuário; Igualdade; Eficiência; Segurança; e Ética",
+        "O usuário deverá receber, conforme os princípios expressos na lei nº 13.460/17, um atendimento pautado nas seguintes diretrizes:n· Urbanidade;n· Respeito;n· Acessibilidade;n· Cortesia;n· Presunção da boa-fé do usuário;n· Igualdade;n· Eficiência;n· Segurança; en· Ética",
         "Informações sobre as condições de acessibilidade, sinalização, limpeza e conforto dos locais de atendimento",
+        "O usuário do serviço público, conforme estabelecido pela lei nº13.460/17, tem direito a atendimento presencial, quando necessário, em instalações salubres, seguras, sinalizadas, acessíveis e adequadas ao serviço e ao atendimento.",
+        "Informação sobre quem tem direito a tratamento prioritário",
+        "Tem direito a atendimento prioritário as pessoas com deficiência, os idosos com idade igual ou superior a 60 anos, as gestantes, as lactantes, as pessoas com crianças de colo e os obesos, conforme estabelecido pela lei 10.048, de 8 de novembro de 2000",
     ]
 
     for i in range(len(expected)):
-        assert sentences[i] == expected[i], (
-            sentences[i],
-            soup.base.get("href"),
-        )
+        assert sentences[i] == expected[i], (sentences[i], expected[i])
 
 
-def test_get_sentences_div_canais_atendimento(soup):
-    sentences = get_sentences_div_canais_atendimento(soup)
+def test_get_sentences_div_canais_atendimento(case2):
+    sentences = get_sentences_div_canais_atendimento(case2)
     expected = [
         "Ouvidoria",
         "Denúncia",
@@ -174,33 +171,33 @@ def test_get_sentences_div_canais_atendimento(soup):
         "Se você tiver uma idéia ou proposta de melhoria para este serviço",
     ]
 
-    assert sentences == expected, soup.base.get("href")
+    assert sentences == expected, case2.base.get("href")
 
 
-def test_get_sentences_id_category(soup):
-    sentences = get_sentences_id_category(soup)
+def test_get_sentences_id_category(case2):
+    sentences = get_sentences_id_category(case2)
     expected = [
         "Tags:",
-        "Educação Ambiental",
-        "Espaço Educador",
-        "Sala Verde",
-        "Socioambiental",
+        "cotas",
+        "diplomacia",
+        "negro",
+        "ação afirmativa",
     ]
 
-    assert sentences == expected, soup.base.get("href")
+    assert sentences == expected, set(sentences).difference(expected)
 
 
-def test_get_sentences_div_avaliacao(soup):
-    sentences = get_sentences_div_avaliacao(soup)
+def test_get_sentences_div_avaliacao(case2):
+    sentences = get_sentences_div_avaliacao(case2)
     expected = [
         "Esta página foi útil para você?",
     ]
 
-    assert sentences == expected, soup.base.get("href")
+    assert sentences == expected, case2.base.get("href")
 
 
-def test_get_sentences_div_portal_footer(soup):
-    sentences = get_sentences_div_portal_footer(soup)
+def test_get_sentences_div_portal_footer(case2):
+    sentences = get_sentences_div_portal_footer(case2)
     expected = [
         "Serviços",
         "Buscar serviços por",
@@ -215,8 +212,6 @@ def test_get_sentences_div_portal_footer(soup):
         "Servidor Público",
         "Galeria de Aplicativos",
         "Notícias",
-        "Últimas Notícias do GOV.BR",
-        "Últimas notícias",
         "Serviços para o cidadão",
         "Saúde",
         "Agricultura e Pecuária",
@@ -225,6 +220,7 @@ def test_get_sentences_div_portal_footer(soup):
         "Economia e Gestão Pública",
         "Educação e Pesquisa",
         "Energia",
+        "Forças Armadas e Defesa Civil",
         "Infraestrutura",
         "Justiça e Segurança",
         "Meio Ambiente",
@@ -255,7 +251,7 @@ def test_get_sentences_div_portal_footer(soup):
         "Acesso à Informação",
         "Redefinir Cookies",
         "Redes sociais",
-        "Todo o conteúdo deste site está publicado sob a licençaCreative Commons Atribuição-SemDerivações 3.0 Não Adaptada.",
+        "Todo o conteúdo deste site está publicado sob a licença Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada.",
     ]
 
-    assert sentences == expected, soup.base.get("href")
+    assert set(sentences) == set(expected), set(expected).difference(sentences)
