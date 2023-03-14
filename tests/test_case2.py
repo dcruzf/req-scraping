@@ -44,9 +44,9 @@ def test_get_sentences_nav_breadcrumbs(case2):
 def test_get_sentences_div_listagem_servicos(case2):
     sentences = get_sentences_div_listagem_servicos(case2)
     expected = [
-        "Meio Ambiente e Clima",
-        "Pesquisa e Aprendizado",
-        "Estudos e Capacitações",
+        "Assistência Social",
+        "Demais Iniciativas",
+        "Outros Serviços",
     ]
     assert sentences == expected, case2.base.get("href")
 
@@ -54,10 +54,11 @@ def test_get_sentences_div_listagem_servicos(case2):
 def test_get_sentences_div_contentcore_header(case2):
     sentences = get_sentences_div_contentcore_header(case2)
     expected = [
-        "Aderir ao Projeto Salas Verdes",
-        "Iniciar",
+        "Obter bolsa-prêmio do Programa de Ação Afirmativa do Instituto Rio Branco (PAA/IRBr)",
+        '''" Bolsa-Prêmio de Vocação para a Diplomacia"''',
     ]
-    assert sentences == expected, case2.base.get("href")
+
+    assert sentences == expected, set(sentences).difference(expected)
 
 
 def test_get_sentences_div_contentcore_avaliacao_container(case2):
@@ -68,7 +69,7 @@ def test_get_sentences_div_contentcore_avaliacao_container(case2):
 
 def test_get_sentences_div_id_viewlet_above_content_body(case2):
     sentences = get_sentences_div_id_viewlet_above_content_body(case2)
-    expected = ["Última Modificação: 25/07/2022", "Compartilhe:"]
+    expected = ["Última Modificação: 05/01/2023", "Compartilhe:"]
     assert sentences == expected, case2.base.get("href")
 
 
@@ -76,9 +77,18 @@ def test_get_sentences_id_dados_basicos(case2):
     sentences = get_sentences_id_dados_basicos(case2)
     expected = [
         "O que é?",
-        "O Projeto Salas Verdes tem como objetivo incentivar a implantação de espaços educadores para atuarem como centros de informação e formação ambiental em todo o país. A Sala Verde é um espaço dedicado ao desenvolvimento de atividades de caráter educacional, voltadas à temática socioambiental e cultural, que visam contribuir e estimular a discussão crítica, a organização e o fortalecimento de identidades grupais. As instituições que queiram criar uma sala verde devem concorrer à chamada pública, submetendo ao MMA um Projeto Político Pedagógico. Ao chancelar uma Sala Verde, o MMA reconhece a sua relevância e certifica que o projeto apresentado está alinhado com as diretrizes e objetivos da Política Nacional de Educação Ambiental. Estão entre as principais ações realizadas pelo MMA em prol das salas verdes: Acompanhar as atividades realizadas pelas salas verdes; Dar visibilidade às atividades desenvolvidas pela Sala Verde no portal do projeto, grupo de facebook e e-mail; Divulgar o espaço como referência em meio ambiente na área de abrangência geográfica de sua localização; Enviar kits do Circuito Tela Verde para as salas verdes, caso tenham interesse em realizar atividades de educação ambiental utilizando material audiovisual; Disponibilizar, em meio digital, publicações e materiais do MMA, de suas entidades vinculadas e de potenciais parceiros institucionais; Informar sobre a disponibilidade de cursos lançados na Plataforma de Educação à distância do MMA.",
+        "O PAA/IRBr foi instituído para proporcionar maior igualdade de oportunidade de acesso à carreira de diplomata e ensejar a diversidade étnica nos quadros do Itamaraty.",
+        "Foi lançado em 2002, por meio de Protocolo de Cooperação entre os Ministérios das Relações Exteriores, da Justiça, da Cultura e da Ciência e Tecnologia.",
+        "Atualmente, participam da Comissão Interministerial responsável pelo processo de seleção dos bolsistas, juntamente com o Instituto Rio Branco, as seguintes instituições públicas parceiras na implementação do Programa:",
+        "¨Ministério da Ciência, Tecnologia, Inovações e Comunicações, por meio do CNPq;",
+        "¨ Ministério da Cultura (Fundação Palmares); e",
+        "¨ Secretaria Especial de Promoção de Políticas de Igualdade Racial (SEPPIR), vinculada ao Ministério dos Direitos Humanos.",
+        "Os bolsistas selecionados receberão bolsa-prêmio no valor de R$ 30 mil, desembolsado pelo CNPq, para o custeio de estudos preparatórios ao Concurso de Admissão à Carreira de Diplomata (CACD).",
     ]
-    assert sentences == expected, case2.base.get("href")
+    for i in range(len(expected)):
+        assert sentences[i] == expected[i], sentences[i]
+
+    assert len(sentences) == len(expected)
 
 
 @pytest.mark.parametrize(
@@ -104,15 +114,12 @@ def test_get_sentences_id_solicitantes(case2):
     sentences = get_sentences_id_solicitantes(case2)
     expected = [
         "Quem pode utilizar este serviço?",
-        "Instituições com capacidade comprovada de atuação na área de Educação Ambiental.",
-        "Para concorrer à chamada pública e implementar uma Sala Verde a instituição deve ter:",
-        "Projeto Político Pedagógico - PPP: é o documento que traça uma proposta de ação pedagógica e social para o espaço da Sala Verde. O PPP consiste na formulação e enunciação de uma proposta educacional, suas bases conceituais e políticas até sua operacionalização.",
-        "Espaço: infraestrutura mínima, devendo contar pelo menos com espaço físico com cadeiras, mesas e estantes. Há ainda exemplos de Salas Verdes que desenvolvem seus projetos de forma itinerante, utilizando a estrutura de ônibus, trens, barcos, caminhões;",
-        "Equipe: a Sala Verde deve contar com uma equipe para o desenvolvimento de suas atividades. A equipe deve se responsabilizar por catalogar e manter em ordem o acervo de livros e materiais, promover atividades educativas, bem como coordenar, acompanhar e avaliar a implementação do Projeto Político Pedagógico- PPP;",
-        "Equipamentos e recursos: não é necessário que a Sala Verde disponha inicialmente de recursos adicionais, além dos recursos humanos e da infraestrutura mínima já mencionada. Considera-se que recursos adicionais, tais como computadores, projetores, quadros podem ser adquiridos e incorporados ao patrimônio da instituição à medida que o projeto se fortaleça e se articule com outras iniciativas;",
+        "Cidadãos brasileiros",
+        "¨Ser negro;",
+        "¨Ter interesse em ingressar na carreira diplomática.",
     ]
 
-    assert sentences == expected, case2.base.get("href")
+    assert sentences == expected, set(sentences).difference(expected)
 
 
 def test_get_sentences_id_etapas_servico(case2):
@@ -120,8 +127,23 @@ def test_get_sentences_id_etapas_servico(case2):
     expected = [
         "Etapas para a realização deste serviço",
         "Inscrever-se no Programa",
-        "Acesse o edital na página do PAA do Instituto Rio Branco",  # TODO: resolver no get_sentence_by_tag
-        "",
+        "Acesse o edital na página do PAA do Instituto Rio Branco",
+        "Canais de prestação",
+        "Presencial :",
+        "Instituto Rio Branco",
+        "Setor de Administração Federal Sul, Quadra 5 -Lotes 2/3",
+        "CEP: 70070-600 - Brasília/DF",
+        "Telefone :",
+        "+55 61 2030-9851 (horário comercial, fuso horário de Brasília)",
+        "E-mail :",
+        "irbr@itamaraty.gov.br",
+        "Documentação",
+        "Documentação em comum para todos os casos",
+        "Carteira de Identidade (RG)",
+        "CPF",
+        "Diploma de curso superior",
+        "Tempo de duração da etapa",
+        "Não estimado ainda",
     ]
 
     for i in range(len(expected)):

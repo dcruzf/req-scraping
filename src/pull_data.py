@@ -2,6 +2,9 @@ import re
 
 from bs4.element import NavigableString
 
+from .utils import get_sentences_tag_util
+
+
 re_spaces = re.compile(r"\s{2,}")
 
 
@@ -62,11 +65,13 @@ def get_sentences_div_contentcore_header(soup):
     content_core = soup.body.find("div", attrs={"id": "content-core"})
     visao_serviço = content_core.find("div", attrs={"class": "visao-servico"})
     header = visao_serviço.find("div", attrs={"class": "header"})
-    text_list = [
-        child.get_text(strip=True)
-        for child in header.find_all(True, recursive=False)
-    ]
-    return text_list
+    text_list = []
+
+    for child in header.find_all(True, recursive=False):
+        text_list.extend(
+            child.get_text("<#SPLIT#>", strip=True).split("<#SPLIT#>")
+        )
+    return [normalize_spaces(s) for s in text_list]
 
 
 def get_sentences_div_contentcore_avaliacao_container(soup):
@@ -116,9 +121,9 @@ def get_sentences_id_etapas_servico(soup):
     conteudo = solicitantes.parent.div
     text_list = [solicitantes.get_text(strip=True)]
     for tag in conteudo.find_all(True, recursive=False):
-        result = get_sentence_by_tag(tag)
+        result = get_sentences_tag_util(tag)
         text_list.extend(result)
-    return [normalize_spaces(text) for text in text_list if text]
+    return [normalize_spaces(text) for text in text_list if text.strip()]
 
 
 def get_sentences_id_outras(soup):

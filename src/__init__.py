@@ -1,5 +1,9 @@
 from bs4 import BeautifulSoup
 
+import sys
+
+sys.setrecursionlimit(10000)
+
 from .async_requests import run_async_requests
 from .pull_data import (
     get_sentences_body_header,
