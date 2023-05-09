@@ -1,6 +1,6 @@
-from bs4 import BeautifulSoup
-
 import sys
+
+from bs4 import BeautifulSoup
 
 sys.setrecursionlimit(10000)
 

@@ -2,10 +2,9 @@ import re
 
 from bs4.element import NavigableString
 
-from .utils import get_sentences_tag_util
+from .utils import get_text_general
 
-
-re_spaces = re.compile(r"\s{2,}")
+re_spaces = re.compile(r"\s{1,}")
 
 
 def normalize_spaces(sentence):
@@ -121,7 +120,7 @@ def get_sentences_id_etapas_servico(soup):
     conteudo = solicitantes.parent.div
     text_list = [solicitantes.get_text(strip=True)]
     for tag in conteudo.find_all(True, recursive=False):
-        result = get_sentences_tag_util(tag)
+        result = get_text_general(tag)
         text_list.extend(result)
     return [normalize_spaces(text) for text in text_list if text.strip()]
 
@@ -131,12 +130,14 @@ def get_sentences_id_outras(soup):
     conteudo = outras.parent.div
     text_list = [outras.get_text(strip=True)]
     for tag in conteudo.find_all(True, recursive=False):
-        if tag.b is not None:
-            text_list.append(tag.b.get_text(" ", strip=True))
-        if tag.div is not None:
-            text_list.append(tag.div.get_text(" ", strip=True))
-        else:
-            text_list.append(tag.get_text(" ", strip=True))
+        # if tag.b is not None:
+        #     text_list.append(tag.b.get_text(" ", strip=True))
+        # if tag.div is not None:
+        #     text_list.append(tag.div.get_text(" ", strip=True))
+        # else:
+        #     text_list.append(tag.get_text(" ", strip=True))
+        result = get_text_general(tag)
+        text_list.extend(result)
     return [normalize_spaces(text) for text in text_list if text]
 
 

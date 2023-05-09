@@ -84,7 +84,7 @@ def run_async_requests(
     result200 = []
     history = []
 
-    for n in range(attenpts):
+    for _ in range(attenpts):
         r200, rnot200 = get_results(
             urls_servicos,
             follow_redirects=follow_redirects,

@@ -27,3 +27,19 @@ def case2():
     path = "tests/resource/case2_obter-bolsa-premio-do-programa-de-acao-afirmativa-do-instituto-rio-branco.html"
     soup = BeautifulSoup(get_code(path), "html.parser")
     yield soup
+
+
+@pytest.fixture(scope="module")
+def case3():
+    """Read requests DataFrame."""
+    path = "tests/resource/case3_certificar-se-como-entidade-beneficente-de-assistencia-social.html"
+    soup = BeautifulSoup(get_code(path), "html.parser")
+    yield soup
+
+
+@pytest.fixture(scope="module")
+def case4():
+    """Read requests DataFrame."""
+    path = "tests/resource/case4_denunciar-violacao-de-direitos-humanos.html"
+    soup = BeautifulSoup(get_code(path), "html.parser")
+    yield soup
