@@ -43,3 +43,11 @@ def case4():
     path = "tests/resource/case4_denunciar-violacao-de-direitos-humanos.html"
     soup = BeautifulSoup(get_code(path), "html.parser")
     yield soup
+
+
+@pytest.fixture(scope="module")
+def case5():
+    """Read requests DataFrame."""
+    path = "tests/resource/case5_requerer-reconhecimento-de-instituicao-certificadora-ou-de-certificacao.html"
+    soup = BeautifulSoup(get_code(path), "html.parser")
+    yield soup

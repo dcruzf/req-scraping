@@ -82,7 +82,7 @@ def test_get_sentences_id_dados_basicos(case3):
         "A Certificação CEBAS também possibilita a entidade a fazer convênios e parcerias com o poder público. Para obter a Certificação, a entidade deve solicitar por este Portal de Serviços gov.br.",
         "Participe dos Conselhos de Usuários(as) de Serviços Públicos do Ministério da Cidadania. Sua opinião é muito importante para ajudar a sua comunidade e todos(as) os(as) demais usuários(as) de serviços públicos a receber serviços mais ágeis, melhores e adequados às expectativas da população.",
         "Qualquer pessoa que utilize determinado serviço pode se inscrever para participar da avaliação dos serviços públicos. Uma vez cadastrados(as), os(as) conselheiros(as) podem responder a consultas sobre os serviços e também apresentar propostas de melhorias. O funcionamento dos conselhos é totalmente virtual, basta se voluntariar por meio da Plataforma virtual do Conselho de Usuários(as) de Serviços Públicos.",
-        "Clique aqui , seja um(a) conselheiro(a) e avalie este serviço!",
+        "Clique aqui, seja um(a) conselheiro(a) e avalie este serviço!",
     ]
     for i in range(len(expected)):
         assert sentences[i] == expected[i], sentences[i]

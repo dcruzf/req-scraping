@@ -100,7 +100,7 @@ def test_get_sentences_id_dados_basicos(case4):
         "Violência contra comunicadores e jornalistas",
         "Violência contra migrantes e refugiados",
         "Pessoas com Doenças Raras",
-        'Para mais informações, visite a seção " Perguntas Frequentes " da página do Ministério da Mulher, da Família e dos Direitos Humanos .',
+        'Para mais informações, visite a seção "Perguntas Frequentes" da página do Ministério da Mulher, da Família e dos Direitos Humanos.',
     ]
     for i in range(len(expected)):
         assert sentences[i] == expected[i], sentences[i]

@@ -12,7 +12,6 @@ def normalize_spaces(sentence):
 
 
 def get_sentence_by_tag(tag):
-
     if tag.name == "p":
         if not tag.find_all("br"):
             return [tag.get_text(" ", strip=True)]
@@ -100,7 +99,7 @@ def get_sentences_id_dados_basicos(soup):
     conteudo = a_dados_basicos.parent.div
     text_list = [a_dados_basicos.get_text(strip=True)]
     for tag in conteudo.find_all(True, recursive=False):
-        result = get_sentence_by_tag(tag)
+        result = get_text_general(tag)
         text_list.extend(result)
     return [normalize_spaces(text) for text in text_list if text]
 
@@ -110,7 +109,7 @@ def get_sentences_id_solicitantes(soup):
     conteudo = solicitantes.parent.div
     text_list = [solicitantes.get_text(strip=True)]
     for tag in conteudo.find_all(True, recursive=False):
-        result = get_sentence_by_tag(tag)
+        result = get_text_general(tag)
         text_list.extend(result)
     return [normalize_spaces(text) for text in text_list if text]
 
