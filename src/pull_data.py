@@ -11,24 +11,6 @@ def normalize_spaces(sentence):
     return re_spaces.sub(" ", sentence).strip()
 
 
-def get_sentence_by_tag(tag):
-    if tag.name == "p":
-        if not tag.find_all("br"):
-            return [tag.get_text(" ", strip=True)]
-        text_list = []
-        for descendant in tag.descendants:
-            if isinstance(descendant, NavigableString):
-                text = descendant.strip()
-                text_list.append(text)
-            elif descendant.name == "br":
-                text_list.append("<#SPLIT#>")
-        text_list = " ".join(text_list).split("<#SPLIT#>")
-        return [text.strip() for text in text_list if text.strip()]
-    else:
-        text_list = tag.get_text("<#SPLIT#>", strip=True).split("<#SPLIT#>")
-        return text_list
-
-
 def get_sentences_body_header(soup):
     """Get sentences from soup.body.header."""
     text_list = [

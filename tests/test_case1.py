@@ -2,7 +2,6 @@ import pytest
 from bs4 import BeautifulSoup
 
 from src.pull_data import (
-    get_sentence_by_tag,
     get_sentences_body_header,
     get_sentences_div_avaliacao,
     get_sentences_div_canais_atendimento,
@@ -79,25 +78,6 @@ def test_get_sentences_id_dados_basicos(case1):
         "O Projeto Salas Verdes tem como objetivo incentivar a implantação de espaços educadores para atuarem como centros de informação e formação ambiental em todo o país. A Sala Verde é um espaço dedicado ao desenvolvimento de atividades de caráter educacional, voltadas à temática socioambiental e cultural, que visam contribuir e estimular a discussão crítica, a organização e o fortalecimento de identidades grupais. As instituições que queiram criar uma sala verde devem concorrer à chamada pública, submetendo ao MMA um Projeto Político Pedagógico. Ao chancelar uma Sala Verde, o MMA reconhece a sua relevância e certifica que o projeto apresentado está alinhado com as diretrizes e objetivos da Política Nacional de Educação Ambiental. Estão entre as principais ações realizadas pelo MMA em prol das salas verdes: Acompanhar as atividades realizadas pelas salas verdes; Dar visibilidade às atividades desenvolvidas pela Sala Verde no portal do projeto, grupo de facebook e e-mail; Divulgar o espaço como referência em meio ambiente na área de abrangência geográfica de sua localização; Enviar kits do Circuito Tela Verde para as salas verdes, caso tenham interesse em realizar atividades de educação ambiental utilizando material audiovisual; Disponibilizar, em meio digital, publicações e materiais do MMA, de suas entidades vinculadas e de potenciais parceiros institucionais; Informar sobre a disponibilidade de cursos lançados na Plataforma de Educação à distância do MMA.",
     ]
     assert sentences == expected, case1.base.get("href")
-
-
-@pytest.mark.parametrize(
-    "tag, expected",
-    (
-        ("<p>test</p>", ["test"]),
-        ("<p>test <span>test</span> test</p>", ["test test test"]),
-        ("<p>test <div>test</div><br> test</p>", ["test test", "test"]),
-        ("<p>test <br><br>test</p>", ["test", "test"]),
-        ("<p>test <br><br>test<br><br></p>", ["test", "test"]),
-        ("<span>test</span>", ["test"]),
-        ("<div>test <span>test</span></div>", ["test", "test"]),
-    ),
-)
-def test_get_sentence_by_tag(tag, expected):
-    soup = BeautifulSoup(tag, "html.parser")
-    tag = soup.find(True)
-    result = get_sentence_by_tag(tag)
-    assert result == expected, tag.name
 
 
 def test_get_sentences_id_solicitantes(case1):

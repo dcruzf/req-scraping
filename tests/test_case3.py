@@ -2,7 +2,6 @@ import pytest
 from bs4 import BeautifulSoup
 
 from src.pull_data import (
-    get_sentence_by_tag,
     get_sentences_body_header,
     get_sentences_div_avaliacao,
     get_sentences_div_canais_atendimento,
@@ -88,25 +87,6 @@ def test_get_sentences_id_dados_basicos(case3):
         assert sentences[i] == expected[i], sentences[i]
 
     assert len(sentences) == len(expected)
-
-
-@pytest.mark.parametrize(
-    "tag, expected",
-    (
-        ("<p>test</p>", ["test"]),
-        ("<p>test <span>test</span> test</p>", ["test test test"]),
-        ("<p>test <div>test</div><br> test</p>", ["test test", "test"]),
-        ("<p>test <br><br>test</p>", ["test", "test"]),
-        ("<p>test <br><br>test<br><br></p>", ["test", "test"]),
-        ("<span>test</span>", ["test"]),
-        ("<div>test <span>test</span></div>", ["test", "test"]),
-    ),
-)
-def test_get_sentence_by_tag(tag, expected):
-    soup = BeautifulSoup(tag, "html.parser")
-    tag = soup.find(True)
-    result = get_sentence_by_tag(tag)
-    assert result == expected, tag.name
 
 
 def test_get_sentences_id_solicitantes(case3):
